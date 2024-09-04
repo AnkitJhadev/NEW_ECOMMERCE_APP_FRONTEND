@@ -13,6 +13,8 @@ import ShoppingCheckout from "./pages/Shopping-view/checkout";
 import ShoppingHome from "./pages/Shopping-view/home";
 import ShoppingListing from "./pages/Shopping-view/listing";
 import NotFound from "./pages/Not-Found/NotFound";
+import CheckAuth from "./components/common/check-auth";
+import unauth from "./pages/un-auth/unauth";
 
 function App() {
   return (
@@ -20,19 +22,37 @@ function App() {
       <h1>Header Component</h1>
       <Routes>
         {/* Parent Route */}
-        <Route path="/auth" element={<AuthLayout />}>
+        <Route path="/auth" element={
+          <CheckAuth>
+          <AuthLayout />
+
+          </CheckAuth>
+          
+          }>
           {/* Nested Routes (Note the paths are relative) */}
           <Route path="login" element={<AuthLogin />} />
           <Route path="register" element={<AuthRegister />} />
         </Route>
-        <Route path="/admin" element={<AdminLayout/>}>
+        <Route path="/admin" element={
+          <CheckAuth>
+          <AdminLayout/>
+
+          </CheckAuth>
+          
+          }>
         <Route path="dashboard" element={<AdminDashboard/>}/>
         <Route path="features" element={<AdminFeatures/>}/>
         <Route path="orders" element={<AdminOrders/>}/>
         <Route path="products" element={<AdminSidebar/>}/>
         </Route>
 
-        <Route path="/shop" element={<ShoppingLayout/>}>
+        <Route path="/shop" element={
+          <CheckAuth>
+          <ShoppingLayout/>
+
+          </CheckAuth>
+          
+          }>
         <Route path="account" element={<ShoppingAccount/>}/>
         <Route path="checkout" element={<ShoppingCheckout/>}/>
 
