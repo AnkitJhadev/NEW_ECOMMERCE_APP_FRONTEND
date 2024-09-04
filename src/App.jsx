@@ -12,6 +12,7 @@ import ShoppingAccount from "./pages/Shopping-view/account";
 import ShoppingCheckout from "./pages/Shopping-view/checkout";
 import ShoppingHome from "./pages/Shopping-view/home";
 import ShoppingListing from "./pages/Shopping-view/listing";
+import NotFound from "./pages/Not-Found/NotFound";
 
 function App() {
   return (
@@ -38,6 +39,8 @@ function App() {
         <Route path="home" element={<ShoppingHome/>}/>
         <Route path="listing" element={<ShoppingListing/>}/>
         </Route>
+
+        <Route path="*" element={<NotFound/>}/>
       </Routes>
     </>
   );
