@@ -15,52 +15,60 @@ import ShoppingListing from "./pages/Shopping-view/listing";
 import NotFound from "./pages/Not-Found/NotFound";
 import CheckAuth from "./components/common/check-auth";
 import unauth from "./pages/un-auth/unauth";
+import { useSelector } from "react-redux";
 
 function App() {
+  const { user, isAuthenticated, isLoading } = useSelector((state) => state.auth);
+
   return (
     <>
       <h1>Header Component</h1>
       <Routes>
-        {/* Parent Route */}
-        <Route path="/auth" element={
-          <CheckAuth>
-          <AuthLayout />
-
-          </CheckAuth>
-          
-          }>
-          {/* Nested Routes (Note the paths are relative) */}
+        {/* Auth Routes */}
+        <Route
+          path="/auth"
+          element={
+            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+              <AuthLayout />
+            </CheckAuth>
+          }
+        >
           <Route path="login" element={<AuthLogin />} />
           <Route path="register" element={<AuthRegister />} />
         </Route>
-        <Route path="/admin" element={
-          <CheckAuth>
-          <AdminLayout/>
 
-          </CheckAuth>
-          
-          }>
-        <Route path="dashboard" element={<AdminDashboard/>}/>
-        <Route path="features" element={<AdminFeatures/>}/>
-        <Route path="orders" element={<AdminOrders/>}/>
-        <Route path="products" element={<AdminSidebar/>}/>
+        {/* Admin Routes */}
+        <Route
+          path="/admin"
+          element={
+            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+              <AdminLayout />
+            </CheckAuth>
+          }
+        >
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="features" element={<AdminFeatures />} />
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="products" element={<AdminSidebar />} />
         </Route>
 
-        <Route path="/shop" element={
-          <CheckAuth>
-          <ShoppingLayout/>
-
-          </CheckAuth>
-          
-          }>
-        <Route path="account" element={<ShoppingAccount/>}/>
-        <Route path="checkout" element={<ShoppingCheckout/>}/>
-
-        <Route path="home" element={<ShoppingHome/>}/>
-        <Route path="listing" element={<ShoppingListing/>}/>
+        {/* Shopping Routes */}
+        <Route
+          path="/shop"
+          element={
+            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+              <ShoppingLayout />
+            </CheckAuth>
+          }
+        >
+          <Route path="account" element={<ShoppingAccount />} />
+          <Route path="checkout" element={<ShoppingCheckout />} />
+          <Route path="home" element={<ShoppingHome />} />
+          <Route path="listing" element={<ShoppingListing />} />
         </Route>
 
-        <Route path="*" element={<NotFound/>}/>
+        {/* Catch-all Route */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

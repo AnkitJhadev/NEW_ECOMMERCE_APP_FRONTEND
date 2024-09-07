@@ -4,11 +4,26 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store/store.js'
+import { Toaster } from "@/components/ui/toaster"
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <head />
+      <body>
+        <main>{children}</main>
+        <Toaster />
+      </body>
+    </html>
+  )
+}
+
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
   <Provider store = {store}>
   <App />
+  <Toaster />
 
   </Provider>
   </BrowserRouter>
